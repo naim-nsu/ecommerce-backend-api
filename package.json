@@ -15,6 +15,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "module-alias": "^2.2.3"
+  },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@tsconfig/node22": "^22.0.2",
@@ -37,15 +46,6 @@
     "tsc-watch": "^7.1.1",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0"
-  },
-  "dependencies": {
-    "compression": "^1.8.1",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "helmet": "^8.1.0",
-    "module-alias": "^2.2.3"
   },
   "_moduleAliases": {
     "@": "./dist/src"
