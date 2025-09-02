@@ -6,7 +6,11 @@ import helmet from "helmet";
 import "module-alias/register";
 
 import config from "@/configs";
+import connectDB from "@/configs/dbConfig";
 import errorHandler from "@/middlewares/errorHandler";
+
+//connect database
+connectDB();
 
 // Initialize Express app
 const app = express();
@@ -42,6 +46,6 @@ app.get("/", (req, res) => {
 app.use(errorHandler);
 
 // Start the server
-app.listen(config.PORT, () => {
-  console.log(`server is running on port ${config.PORT}`);
+app.listen(config.port, () => {
+  console.log(`server is running on port ${config.port}`);
 });
