@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from "express";
 import config from "@/configs";
 import CustomError from "@/errors/CustomError";
 import getErrorMessage from "@/utils/getErrorMessage";
-import logger from "@/utils/logger";
 
 export default function errorHandler(
   error: unknown,
@@ -11,17 +10,17 @@ export default function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  // Log the error
-  logger.error("Error caught by errorHandler", {
-    error,
-    url: req.originalUrl,
-    method: req.method,
-    headers: req.headers,
-    query: req.query,
-    params: req.params,
-    body: req.body,
-    ip: req.ip,
-  });
+  // // Log the error
+  // logger.error("Error caught by errorHandler", {
+  //   error,
+  //   url: req.originalUrl,
+  //   method: req.method,
+  //   headers: req.headers,
+  //   query: req.query,
+  //   params: req.params,
+  //   body: req.body,
+  //   ip: req.ip,
+  // });
 
   // if response already sent or during debug mode, let the express.js default error handlers handle it
   if (res.headersSent || config.debug) {

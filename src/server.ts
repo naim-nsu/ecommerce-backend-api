@@ -60,8 +60,7 @@ app.use(helmet());
 // Use rate limiter
 app.use(limiter);
 
-// Global error handler middleware
-app.use(errorHandler);
+let server: ReturnType<typeof app.listen>;
 
 (async () => {
   try {
@@ -71,8 +70,11 @@ app.use(errorHandler);
     //routes
     app.use("/api/v1", v1Routes);
 
+    // Global error handler middleware
+    app.use(errorHandler);
+
     // Start the server
-    app.listen(config.port, () => {
+    server = app.listen(config.port, () => {
       logger.info(`server is running on http://localhost:${config.port}`);
     });
   } catch (error) {
@@ -87,13 +89,14 @@ app.use(errorHandler);
 // Graceful shutdown
 const handleServerShutdown = async () => {
   try {
-    await disconnectFromDatabase();
-    logger.warn("Server shutdown");
-    process.exit(0);
+    server.close(async () => {
+      await disconnectFromDatabase();
+      logger.warn("Server Shutdown!");
+    });
   } catch (error) {
     logger.error("Error during server shutdown", error);
   }
 };
 
-process.on("SIGINT", handleServerShutdown);
-process.on("SIGTERM", handleServerShutdown);
+// process.on("SIGINT", handleServerShutdown);
+// process.on("SIGTERM", handleServerShutdown);

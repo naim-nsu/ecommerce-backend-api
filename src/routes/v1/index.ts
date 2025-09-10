@@ -1,6 +1,8 @@
 import config from "@/configs";
 import { Router } from "express";
 
+import authRoutes from "@/routes/v1/auth";
+
 const router = Router();
 
 // Health check endpoint
@@ -13,5 +15,7 @@ router.get("/", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+router.use("/auth", authRoutes);
 
 export default router;
