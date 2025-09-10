@@ -1,9 +1,10 @@
-import config from "@/configs";
 import fs from "fs";
 import path from "path";
 import winston from "winston";
 import "winston-daily-rotate-file";
 import "winston-mongodb";
+
+import config from "@/configs";
 
 // Ensure logs directory exists
 if (!fs.existsSync(config.logDir)) {
@@ -76,7 +77,8 @@ const devConsoleTransport = new winston.transports.Console({
 // mongodb transport
 const mongoDbTransport = new winston.transports.MongoDB({
   level: config.logLevel,
-  db: config.dbUri,
+  db: config.mongoUri,
+  dbName: config.dbName,
   collection: "logs",
   storeHost: true,
   capped: true,
